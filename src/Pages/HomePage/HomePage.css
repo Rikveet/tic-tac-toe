@@ -6,7 +6,7 @@
     h1 {
         @apply
         mt-20
-        text-6xl text-white font-mono
+        text-4xl lg:text-6xl text-white font-mono
     }
 }
 
@@ -35,7 +35,7 @@
         bg-blue hover:bg-dodgeBlue
         text-white font-bold
         py-5 px-4 rounded-full
-        mx-4
+        mx-4 my-4
         transition ease-linear duration-200;
     }
 

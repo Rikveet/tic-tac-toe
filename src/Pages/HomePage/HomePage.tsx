@@ -7,7 +7,7 @@ function HomePage() {
         <section className="main_section">
             <h1>Tic Tac Toe</h1>
             <div className='menu'>
-                <div className='text-white cursor-default group'>
+                <div className='text-white cursor-default flex flex-col md:flex-row group'>
                     <button className='btn btnVisible'>Multiplayer
                     </button>
                     <button
