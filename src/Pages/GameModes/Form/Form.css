@@ -1,0 +1,9 @@
+@tailwind components;
+
+@layer components{
+    .form{
+        @apply
+            backdrop-filter backdrop-blur
+            h-1/2 w-1/2
+    }
+}

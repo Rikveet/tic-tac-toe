@@ -2,13 +2,18 @@
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}',],
     theme: {
-        colors:{
-            transparent: 'transparent',
-            violet: "#42047e",
-            skyGreen: "#07f49e",
-            white: "#FFF",
-            blue: "#0000FF",
-            dodgeBlue: "#1E90FF"
+        screens: {
+            'sm': {'min': '640px', 'max': '767px'},
+            'md': {'min': '768px', 'max': '1023px'},
+            'lg': {'min': '1024px', 'max': '1279px'},
+            'xl': {'min': '1280px', 'max': '1535px'},
+            '2xl': {'min': '1536px'},
+            'xst': { 'raw': '(min-height: 400px)' },
+            'st': { 'raw': '(min-height: 800px)' },
+            'mt': { 'raw': '(min-height: 1000px)' },
+            'lt': { 'raw': '(min-height: 1200px)' },
+            'xt': { 'raw': '(min-height: 1400px)' },
+            '2xt': { 'raw': '(min-height: 1600px)' },
         },
         extend: {
             'animation': {

@@ -2,59 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    h1 {
-        @apply
-        mt-20
-        text-4xl lg:text-6xl text-white font-mono
-    }
-}
-
 @layer components {
-    .main_section {
-        @apply
-        px-6 mx-auto h-screen w-screen
-        flex flex-col items-center
-        font-sans
-        bg-gradient-to-r from-violet to-skyGreen animate-gradient-xy;
-    }
-
-    .abs-center {
-        @apply absolute;
-    }
-
-    .menu {
-        @apply
-        flex flex-col flex-grow space-y-4
-        justify-center items-center;
-    }
 
     .btn {
-        width: 200px;
         @apply
-        bg-blue hover:bg-dodgeBlue
-        text-white font-bold
-        py-5 px-4 rounded-full
-        mx-4 my-4
-        transition ease-linear duration-200;
+            bg-fuchsia-900 hover:bg-indigo-900
+            text-white font-bold text-center
+            py-5 px-4 rounded-full
+            mx-4 my-4
+            w-40 md:w-48 lg:w-52
+            transition ease-linear duration-200;
     }
 
-    .btnVisible{
+    .btnVisible {
         z-index: 1;
         @apply opacity-100 relative
     }
 
-    .btnHidden{
+    .btnHidden {
         z-index: -1;
         @apply opacity-0 absolute
     }
 
-    .group:hover .btnVisible{
+    .group:hover .btnVisible {
         z-index: -1;
         @apply opacity-0 absolute
     }
 
-    .group:hover .btnHidden{
+    .group:hover .btnHidden {
         z-index: 1;
         @apply opacity-100 relative
     }

@@ -4,11 +4,18 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomePage from "./Pages/HomePage/HomePage";
+import Local from "./Pages/GameModes/Local/Local";
 
 const route = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage/>
+        element: <HomePage/>,
+        errorElement: <h1> It seems like we have an error here. </h1>,
+        children: []
+    },
+    {
+        path:"local",
+        element: <Local/>
     }
 ])
 
@@ -17,7 +24,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <RouterProvider router={route}/>
+        <div className='bg-gradient flex-col px-6 h-screen w-screen'>
+            <div className='page-heading'>
+                Tic Tac Toe
+            </div>
+            <RouterProvider router={route}/>
+        </div>
     </React.StrictMode>
 );
 

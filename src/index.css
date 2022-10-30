@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+    div{
+        @apply
+        flex h-full w-full justify-center items-center
+        text-center font-sans
+        transition-[padding] duration-500 ease-in-out
+        space-y-5
+    }
+}
+
+@layer components{
+
+    .main{
+        @apply
+        pb-0 st:pb-40 mt:pb-56 lt:pb-64 xt:pb-72 2xt:pb-80
+    }
+
+    .bg-gradient{
+        @apply
+        bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-amber-200 via-violet-600 to-sky-900 animate-gradient-xy
+    }
+
+    .page-heading {
+        @apply
+        h-1/4
+        text-center
+        text-4xl lg:text-6xl text-white font-mono
+    }
+
+}

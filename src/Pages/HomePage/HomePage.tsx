@@ -1,26 +1,27 @@
 import React from 'react';
 import './HomePage.css';
+import {Link} from "react-router-dom";
 
 function HomePage() {
-
     return (
-        <section className="main_section">
-            <h1>Tic Tac Toe</h1>
-            <div className='menu'>
-                <div className='text-white cursor-default flex flex-col md:flex-row group'>
-                    <button className='btn btnVisible'>Multiplayer
+        <>
+            <div className='main flex-row xst:flex-col'>
+                <div className='text-white cursor-default flex-col md:flex-row group h-fit w-fit'>
+                    <button className='btn btnVisible'>
+                        Multiplayer
                     </button>
-                    <button
-                        className='btn btnHidden'>Local
-                    </button>
-                    <button
-                        className='btn btnHidden'>Online
-                    </button>
+                    <Link className='btn btnHidden' to={"local"}>
+                        Local
+                    </Link>
+                    <Link className='btn btnHidden' to={"online"}>
+                        Online
+                    </Link>
                 </div>
-
-                <button className='btn text-white'>Single Player</button>
+                <Link className='btn text-white' to={"singlePlayer"}>
+                    Single Player
+                </Link>
             </div>
-        </section>
+        </>
     );
 }
 
