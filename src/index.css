@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face{
+    font-family: 'CoolParty';
+    src: url("../public/Fonts/IHavePrettyCoolParty-R8nW.otf");
+}
+
 @layer base{
     div{
         @apply
             flex h-full w-full justify-center items-center relative
-            min-h-max min-w-max
             text-center font-sans
             transition-[padding] duration-500 ease-in-out
+            min-h-fit min-w-fit
             overflow-y-scroll
             m-0 p-0
     }

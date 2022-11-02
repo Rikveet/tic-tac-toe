@@ -8,12 +8,12 @@ module.exports = {
             'lg': {'min': '1024px', 'max': '1279px'},
             'xl': {'min': '1280px', 'max': '1535px'},
             '2xl': {'min': '1536px'},
-            'xst': { 'raw': '(min-height: 400px)' },
-            'st': { 'raw': '(min-height: 800px)' },
-            'mt': { 'raw': '(min-height: 1000px)' },
-            'lt': { 'raw': '(min-height: 1200px)' },
-            'xt': { 'raw': '(min-height: 1400px)' },
-            '2xt': { 'raw': '(min-height: 1600px)' },
+            'xst': {'raw': '(min-height: 400px)'},
+            'st': {'raw': '(min-height: 800px)'},
+            'mt': {'raw': '(min-height: 1000px)'},
+            'lt': {'raw': '(min-height: 1200px)'},
+            'xt': {'raw': '(min-height: 1400px)'},
+            '2xt': {'raw': '(min-height: 1600px)'},
         },
         extend: {
             'animation': {
@@ -53,19 +53,18 @@ module.exports = {
                         'background-position': 'right center'
                     }
                 },
-                'mmb-animation':{
-                    '0%':{
-
-                    },
-                    '50%':{
-
-                    },
-                    '100%':{
-
-                    }
+                'mmb-animation': {
+                    '0%': {},
+                    '50%': {},
+                    '100%': {}
                 }
+            },
+            fontFamily:{
+                coolParty:["CoolParty",'cursive']
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('tailwindcss-touch')(),
+    ]
 }

@@ -1,0 +1,9 @@
+@tailwind components;
+
+@layer components{
+    .current{
+        @apply
+        text-red-700
+        scale-110
+    }
+}

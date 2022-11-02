@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useState} from "react";
 import "./InputField.css";
-import {Validator} from "../../../../../../HelperFunctions";
+import {IValidator} from "../../../../../../Types/Intefaces";
 
-const InputField = (props: { iptT: string, htmF: string, plh: string, name: string, labelText: string, validate: Validator }) => {
+const InputField = (props: { iptT: string, htmF: string, plh: string, name: string, labelText: string, validate: IValidator }) => {
     const [error, setError] = useState("");
     const [errorExpand, setErrorExpand] = useState(false);
     const maxErrorVisibleChars = 10;

@@ -1,54 +1,62 @@
-import React, {useContext, useEffect, useState} from 'react';
-import Board from "./components/GameBoard/Board";
-import Form from "./components/Form/Form";
-import InputField from "./components/Form/Form components/Input/InputField";
+import React, {useRef, useState} from 'react';
+import Board from "./Components/GameBoard/Board";
+import Form from "./Components/Form/Form";
+import InputField from "./Components/Form/Form components/Input/InputField";
 import {Navigate} from "react-router-dom";
-import FormManagerContext from "../../Contexts/FormManagerContext";
-import {getBoard, Validator} from "../../HelperFunctions";
+import {getBoard} from "../../HelperFunctions";
+import './Game.css';
+import {UID, GamePlayers, FormSettings, ReactRef, BoardArray} from "../../Types/Types";
 
-const Game = () => {
+const Game = (props:{formSettings: ReactRef<FormSettings>}) => {
     const [isFormFilled, setFormFilled] = useState<boolean>(false);
-    const [gameBoard, setGameBoard] = useState(getBoard(3));
 
-    // game config shared via react router v6
-    const contextWrapper = useContext(FormManagerContext);
-    const {formHandler, player, opponent} = {...contextWrapper.context};
+    const gameBoard = useRef<BoardArray>(getBoard(3));
+    const [players, setCurrentPlayers] = useState<GamePlayers>();
+    const currentPlayer = useRef<UID>();
 
+    const {formSettings} = {...props};
+    const {formType, validator} = {...formSettings.current};
+    formSettings.current = {
+        ...formSettings.current!,
+        formCompleted: () => {
+            setFormFilled(true)
+        },
+        setPlayers: (players: GamePlayers) => {
+            setCurrentPlayers(players);
+        },
+        setCurrentPlayer: (uid: UID) => {
+            currentPlayer.current = uid;
+        }
+    }
 
-    useEffect(() => {
-        return () => {
-            console.log(player)
-        };
-    }, [player]);
-
+    const isCurrentCssClass = (uid: number): string => {
+        return currentPlayer.current === uid ? 'current' : '';
+    }
 
     return (
-        (!(formHandler.formType && formHandler.validator)) ?
-            <Navigate to={'/'} replace={true}/> :
-            <div className={'main'}>
-                {isFormFilled && player && opponent ?
-                    <div className={'flex-col h-fill w-fill mx-auto overflow-x-hidden max-w-fit'}>
-                        <div className={'flex-row h-[10%]'}>
-                            <span className={'absolute left-0'}>{player.name}</span>
-                            <span className={'absolute right-0'}>{opponent.name}</span>
+        (!(formType && validator)) ? <Navigate to={'/'} replace={true}/> :
+            <div className={'main min-h-[500px]'}>
+                {isFormFilled && players ?
+                    <div className={'flex-col h-fill min-w-fit max-w-[500px] mx-auto'}>
+                        <div className={'flex-row h-[10%] w-fill justify-around'}>
+                            <span className={isCurrentCssClass(players.player.uid)}>{players.player.name}</span>
+                            <span className={isCurrentCssClass(players.opponent.uid)}>{players.opponent.name}</span>
                         </div>
-                        <div className={'p-5 w-fit'}>
-                            <Board boardArray={gameBoard}/>
+                        <div className={'p-5 aspect-square h-auto w-fill'}>
+                            <Board boardArray={gameBoard} currentPlayer={currentPlayer} players={players}/>
                         </div>
                     </div>
                     :
-                    <Form formCompleted={setFormFilled}>
+                    <Form formSettings={formSettings}>
                         <InputField iptT={'text'} htmF={'player_name'} plh={'Player 1'} name={'player_name'}
-                                    validate={formHandler!.validator as Validator} labelText={'Player Name'}/>
+                                    validate={validator} labelText={'Player Name'}/>
                         <InputField iptT={'text'} htmF={'opponent_name'} plh={'Player 2'} name={'opponent_name'}
-                                    validate={formHandler!.validator as Validator}
+                                    validate={validator}
                                     labelText={'Opposition Player Name'}/>
                     </Form>
 
                 }
             </div>
-
-
     );
 };
 

@@ -1,11 +1,12 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './HomePage.css';
 import {useNavigate} from "react-router-dom";
 import {validateName} from "../../HelperFunctions";
-import FormManagerContext from "../../Contexts/FormManagerContext";
+import {FormSettings} from "../../Types/Types";
 
-function HomePage() {
-    const contextWrapper = useContext(FormManagerContext);
+function HomePage(props:{setFormSettings:{(settings :FormSettings):void}}) {
+
+    const {setFormSettings} = {...props};
     const navigate = useNavigate();
 
     return (
@@ -16,7 +17,7 @@ function HomePage() {
                 </button>
                 <button className='btn btnHidden' onClick={
                     () => {
-                        contextWrapper.setContext({fType: 'local', v: validateName});
+                        setFormSettings({formType: 'local', validator: validateName} as FormSettings);
                         navigate('game', {replace: true});
                     }}>Local
                 </button>
@@ -26,7 +27,7 @@ function HomePage() {
                 </button>
             </div>
             <button className='btn text-white' onClick={() => {
-                contextWrapper.setContext({fType: 'single', v: validateName});
+                setFormSettings({formType: 'single', validator: validateName} as FormSettings);
                 navigate('game', {replace: true});
             }}>
                 Single Player
