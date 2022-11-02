@@ -45,7 +45,6 @@ export interface FormManagerWrapperContextType {
     setContext: (params: {
         fType?: GameTypes,
         v?: Validator,
-        fCompleted?: ReactSetState<boolean>,
         p?: Player,
         o?: Player,
         cP?: Player

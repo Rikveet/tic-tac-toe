@@ -14,12 +14,6 @@ const Game = () => {
     const contextWrapper = useContext(FormManagerContext);
     const {formHandler, player, opponent} = {...contextWrapper.context};
 
-    useEffect(() => {
-        return () => {
-            contextWrapper.setContext({fCompleted: setFormFilled})
-        };
-    }, []);
-
 
     useEffect(() => {
         return () => {
@@ -43,7 +37,7 @@ const Game = () => {
                         </div>
                     </div>
                     :
-                    <Form>
+                    <Form formCompleted={setFormFilled}>
                         <InputField iptT={'text'} htmF={'player_name'} plh={'Player 1'} name={'player_name'}
                                     validate={formHandler!.validator as Validator} labelText={'Player Name'}/>
                         <InputField iptT={'text'} htmF={'opponent_name'} plh={'Player 2'} name={'opponent_name'}

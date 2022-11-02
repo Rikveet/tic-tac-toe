@@ -1,20 +1,22 @@
 import React, {useContext} from 'react';
-import {Player} from "../../../../HelperFunctions";
+import {Player, ReactSetState} from "../../../../HelperFunctions";
 import './Form.css';
 import FormManagerContext from "../../../../Contexts/FormManagerContext";
 
 
 // make better a common uid function
-const createUID = (max:number = 10000, min:number =1000):number => {
-    return Math.floor(((Math.random() * (max-min + 1)) + min));
+const createUID = (max: number = 10000, min: number = 1000): number => {
+    return Math.floor(((Math.random() * (max - min + 1)) + min));
 }
 
 const Form = (props: {
+    formCompleted: ReactSetState<boolean>,
     children: React.ReactNode[]
 }) => {
     const contextWrapper = useContext(FormManagerContext);
+    const {formCompleted} = {...props};
     const {formHandler} = {...contextWrapper.context}
-    const {formType, formCompleted, validator} = {...formHandler};
+    const {formType, validator} = {...formHandler};
     const formSubmitHandler = (e: React.SyntheticEvent) => {
         e.persist();
         e.preventDefault();
@@ -36,7 +38,7 @@ const Form = (props: {
                 // contextWrapper.setContext({ potential better way but is unable to update as player is not the latest ref.
                 //     cP: contextWrapper.context.player
                 // });
-                formCompleted!(true);
+                formCompleted(true);
                 break;
             }
             case
@@ -52,13 +54,13 @@ const Form = (props: {
                 };
                 if (!validator!(target.player_name.value).result) break;
                 contextWrapper.setContext({
-                    p: {name: target.player_name.value, uid:  createUID(), marker: 'x'} as Player,
-                    o: {name: 'Cpu', uid:  createUID(), marker: 'o'} as Player
+                    p: {name: target.player_name.value, uid: createUID(), marker: 'x'} as Player,
+                    o: {name: 'Cpu', uid: createUID(), marker: 'o'} as Player
                 });
                 contextWrapper.setContext({
                     cP: contextWrapper.context.player
                 });
-                formCompleted!(true);
+                formCompleted(true);
                 break;
             }
             default:

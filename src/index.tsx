@@ -6,7 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import HomePage from "./Pages/HomePage/HomePage";
 import Game from "./Pages/Game/Game";
 import FormManagerContext from './Contexts/FormManagerContext';
-import {FormHandler, FormManagerContextType, FormManagerWrapperContextType, GameTypes, Player, ReactSetState, Validator} from "./HelperFunctions";
+import {FormHandler, FormManagerContextType, FormManagerWrapperContextType, GameTypes, Player, Validator} from "./HelperFunctions";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -26,19 +26,17 @@ const App = () => {
         setContext: (params: {
             fType?: GameTypes;
             v?: Validator;
-            fCompleted?: ReactSetState<boolean>;
             p?: Player;
             o?: Player;
             cP?: Player;
         }) => {
             console.log('change requested', params);
-            const {fType, v, fCompleted, p, o, cP} = {...params};
+            const {fType, v, p, o, cP} = {...params};
             setFormHandler({
                 formHandler: {
                     ...formHandlerRef.current.formHandler,
                     formType: fType ? fType : formHandlerRef.current.formHandler.formType,
-                    validator: v ? v : formHandlerRef.current.formHandler.validator,
-                    formCompleted: fCompleted ? fCompleted : formHandlerRef.current.formHandler.formCompleted
+                    validator: v ? v : formHandlerRef.current.formHandler.validator
                 },
                 player: p ? p : formHandlerRef.current.player,
                 opponent: o ? o : formHandlerRef.current.opponent,
