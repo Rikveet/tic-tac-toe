@@ -5,10 +5,16 @@
 @layer base{
     div{
         @apply
-        flex h-full w-full justify-center items-center
-        text-center font-sans
-        transition-[padding] duration-500 ease-in-out
-        space-y-5
+            flex h-full w-full justify-center items-center relative
+            min-h-max min-w-max
+            text-center font-sans
+            transition-[padding] duration-500 ease-in-out
+            overflow-y-scroll
+            m-0 p-0
+    }
+
+    div::-webkit-scrollbar{
+        display: none;
     }
 }
 
@@ -17,6 +23,11 @@
     .main{
         @apply
         pb-0 st:pb-40 mt:pb-56 lt:pb-64 xt:pb-72 2xt:pb-80
+        overflow-y-scroll
+    }
+
+    .main::-webkit-scrollbar{
+        display: none;
     }
 
     .bg-gradient{

@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import "./InputField.css";
-import {Validator} from "../../../HelperFunctions";
+import {Validator} from "../../../../../../HelperFunctions";
 
 const InputField = (props: { iptT: string, htmF: string, plh: string, name: string, labelText: string, validate: Validator }) => {
     const [error, setError] = useState("");
@@ -22,7 +22,7 @@ const InputField = (props: { iptT: string, htmF: string, plh: string, name: stri
         console.log(target.placeholder, target.value, props.validate(target.value))
     }
     return (
-        <span className={'relative min-h-[50px]'}>
+        <div className={'min-h-[45px] max-h-[55px] min-w-[80px] w-[250px] h-[50px] overflow-y-visible'}>
             <label className={'inputFieldTip -mt-3 top-0 hover:scale-[1.4] hover:translate-y-1/4 '}
                    htmlFor={props.htmF}>{props.labelText}</label>
             <input className={'h-full w-full bg-transparent border-4 rounded-xl py-6 px-4 text-white border-solid'}
@@ -46,7 +46,7 @@ const InputField = (props: { iptT: string, htmF: string, plh: string, name: stri
                         error.substring(0, maxErrorVisibleChars - 2) + '..' : error
                 }
             </span>
-        </span>
+        </div>
     )
 }
 
