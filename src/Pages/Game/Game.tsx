@@ -59,6 +59,23 @@ const Game = (props: { formSettings: ReactRef<Settings> }) => {
             }
         }
     }
+
+    const MenuOptions = () => {
+        return (<>
+            <button className={'btn h-fit'} onClick={() => {
+                //custom reset function sent to the <Game/> component.
+                resetGame();
+            }}>
+                Change Settings
+            </button>
+            <button className={'btn h-fit'} onClick={() => {
+                navigate('/', {replace: true});
+            }}>
+                Main Menu
+            </button>
+        </>)
+    }
+
     const Board = () => {
         const [hoverValue, setHoverValue] = useState<undefined | BoardArrayValues>(undefined);
         const [hoverBox, setHoverBox] = useState<undefined | { rowId: number | undefined, colId: number | undefined }>(undefined);
@@ -118,6 +135,7 @@ const Game = (props: { formSettings: ReactRef<Settings> }) => {
                                 }}>
                                     Rematch
                                 </button>
+                                <MenuOptions/>
                             </div>
 
                         </div>
@@ -139,17 +157,7 @@ const Game = (props: { formSettings: ReactRef<Settings> }) => {
                                 <Board/>
                             </div>
                             <span className={'flex flex-row min-h-[5%] h-fit'}>
-                                <button className={'btn h-fit'} onClick={() => {
-                                    //custom reset function sent to the <Game/> component.
-                                    resetGame();
-                                }}>
-                                    Change Settings
-                                </button>
-                                <button className={'btn h-fit'} onClick={() => {
-                                    navigate('/', {replace: true});
-                                }}>
-                                    Main Menu
-                                </button>
+                                <MenuOptions/>
                             </span>
                         </div>
                     :
