@@ -23,7 +23,6 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path={'/'} element={<HomePage setFormSettings={(settings)=>{
-                        console.log(formSettings,settings);
                         formSettings.current = {
                             ...formSettings,
                             ...settings

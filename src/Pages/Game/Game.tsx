@@ -28,7 +28,6 @@ const Game = (props: { formSettings: ReactRef<Settings> }) => {
             setCurrentPlayerUID(uid);
         },
         setBoardSize: (size: number) => {
-            console.log(size);
             boardSize.current = size
             resetBoard()
         }

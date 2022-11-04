@@ -36,7 +36,6 @@ export function checkGameState(gameBoard: BoardArray): '' | 'x' | 'o' | 'draw' {
     }
 
     function check(slice: BoardArrayValues[]) {
-        console.log(slice);
         xWon = count(slice, 'x') === boardSize;
         oWon = count(slice, 'o') === boardSize;
     }

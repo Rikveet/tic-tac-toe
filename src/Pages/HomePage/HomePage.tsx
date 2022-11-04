@@ -27,7 +27,6 @@ function HomePage(props: { setFormSettings: { (settings: Settings): void } }) {
                                 let marker: BoardArrayValues | undefined = undefined;
                                 const {player, opponent} = {...players};
 
-                                console.log(marker, uid)
                                 switch (currentPlayerUID) {
                                     case player.uid: {
                                         marker = player.marker;
@@ -45,7 +44,6 @@ function HomePage(props: { setFormSettings: { (settings: Settings): void } }) {
                                     //check if game over
                                     const state = checkGameState(gameBoard.current!)
                                     if (state !== '') {
-                                        console.log('game over')
                                         setGameOver({
                                             isOver: true,
                                             gameWinner: state,
