@@ -8,10 +8,15 @@
         @apply
             bg-fuchsia-900 hover:bg-indigo-900
             text-white font-bold text-center
-            py-5 px-4 rounded-full
-            mx-4 my-4
-            w-40 md:w-48 lg:w-52
-            transition ease-linear duration-200;
+            py-6 px-4 rounded-lg m-1
+            w-52 md:w-48 sm:w-fit
+            transition ease-linear duration-200
+            mt-2
+            hover:border-solid hover:border-2 hover:border-white
+    }
+    .btn:hover{
+        @apply
+        scale-90
     }
 
     .btnVisible {

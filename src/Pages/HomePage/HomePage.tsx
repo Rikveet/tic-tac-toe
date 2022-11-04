@@ -1,34 +1,72 @@
 import React from 'react';
 import './HomePage.css';
 import {useNavigate} from "react-router-dom";
-import {validateName} from "../../HelperFunctions";
-import {FormSettings} from "../../Types/Types";
+import {checkGameState, putMarkerOnBoard, validateName} from "../../HelperFunctions";
+import {BoardArrayValues, GameOver, Settings, UID} from "../../Types/Types";
 
-function HomePage(props:{setFormSettings:{(settings :FormSettings):void}}) {
+function HomePage(props: { setFormSettings: { (settings: Settings): void } }) {
 
     const {setFormSettings} = {...props};
     const navigate = useNavigate();
 
     return (
-        <div className='main flex-row xst:flex-col'>
-            <div className='text-white cursor-default flex-col md:flex-row group h-fit w-fit'>
+        <div className='main flex-row st:flex-col'>
+            <div className='text-white cursor-default flex-row md:flex-col group h-fit w-fit'>
                 <button className='btn btnVisible'>
                     Multiplayer
                 </button>
                 <button className='btn btnHidden' onClick={
                     () => {
-                        setFormSettings({formType: 'local', validator: validateName} as FormSettings);
-                        navigate('game', {replace: true});
+                        setFormSettings({
+                            formType: 'local',
+                            validator: validateName,
+                            handlePlayerBoxClick: (players, currentPlayerUID, setCurrentPlayerUID, gameBoard, clickX, clickY, setGameOver) => {
+                                // as it is two player no need to check current player just update.
+                                // avoided array out of bounds check
+                                let uid: UID | undefined = undefined;
+                                let marker: BoardArrayValues | undefined = undefined;
+                                const {player, opponent} = {...players};
+
+                                console.log(marker, uid)
+                                switch (currentPlayerUID) {
+                                    case player.uid: {
+                                        marker = player.marker;
+                                        uid = opponent.uid
+                                        break;
+                                    }
+                                    case opponent.uid: {
+                                        marker = opponent.marker;
+                                        uid = player.uid;
+                                        break;
+                                    }
+                                }
+                                if (marker && uid) {
+                                    putMarkerOnBoard(gameBoard, clickX, clickY, marker, setCurrentPlayerUID, uid);
+                                    //check if game over
+                                    const state = checkGameState(gameBoard.current!)
+                                    if (state !== '') {
+                                        console.log('game over')
+                                        setGameOver({
+                                            isOver: true,
+                                            gameWinner: state,
+                                        } as GameOver);
+                                    }
+                                }
+                            }
+                        } as Settings);
+                        navigate('game');
                     }}>Local
                 </button>
                 <button className='btn btnHidden' onClick={() => {
-                    navigate('game', {replace: true});
+                    alert('Coming Soon');
+                    //navigate('game', {replace: true});
                 }}>Online
                 </button>
             </div>
             <button className='btn text-white' onClick={() => {
-                setFormSettings({formType: 'single', validator: validateName} as FormSettings);
-                navigate('game', {replace: true});
+                    alert('Coming Soon');
+                //setFormSettings({formType: 'single', validator: validateName} as Settings);
+                //navigate('game', {replace: true});
             }}>
                 Single Player
             </button>

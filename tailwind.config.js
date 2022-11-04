@@ -3,17 +3,17 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}',],
     theme: {
         screens: {
-            'sm': {'min': '640px', 'max': '767px'},
-            'md': {'min': '768px', 'max': '1023px'},
-            'lg': {'min': '1024px', 'max': '1279px'},
-            'xl': {'min': '1280px', 'max': '1535px'},
-            '2xl': {'min': '1536px'},
-            'xst': {'raw': '(min-height: 400px)'},
-            'st': {'raw': '(min-height: 800px)'},
-            'mt': {'raw': '(min-height: 1000px)'},
-            'lt': {'raw': '(min-height: 1200px)'},
-            'xt': {'raw': '(min-height: 1400px)'},
+            '2xl': {'min': '1535px'},
+            'xl': {'max': '1279px'},
+            'lg': {'max': '1023px'},
+            'md': {'max': '767px'},
+            'sm': {'max': '639px'},
             '2xt': {'raw': '(min-height: 1600px)'},
+            'xt': {'raw': '(max-height: 1400px)'},
+            'lt': {'raw': '(max-height: 1200px)'},
+            'mt': {'raw': '(max-height: 1000px)'},
+            'st': {'raw': '(max-height: 800px)'},
+            'xst': {'raw': '(max-height: 400px)'},
         },
         extend: {
             'animation': {
@@ -59,8 +59,9 @@ module.exports = {
                     '100%': {}
                 }
             },
-            fontFamily:{
-                coolParty:["CoolParty",'cursive']
+            fontFamily: {
+                coolParty: ["CoolParty", 'cursive'],
+                monoton: ['Monoton', 'normal']
             }
         },
     },

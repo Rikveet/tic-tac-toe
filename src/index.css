@@ -6,6 +6,13 @@
     font-family: 'CoolParty';
     src: url("../public/Fonts/IHavePrettyCoolParty-R8nW.otf");
 }
+@font-face {
+    font-family: 'Monoton';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/monoton/v15/5h1aiZUrOngCibe4TkHLQg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @layer base{
     div{
@@ -15,7 +22,6 @@
             transition-[padding] duration-500 ease-in-out
             min-h-fit min-w-fit
             overflow-y-scroll
-            m-0 p-0
     }
 
     div::-webkit-scrollbar{
@@ -27,7 +33,6 @@
 
     .main{
         @apply
-        pb-0 st:pb-40 mt:pb-56 lt:pb-64 xt:pb-72 2xt:pb-80
         overflow-y-scroll
     }
 
@@ -44,7 +49,8 @@
         @apply
         h-1/4
         text-center
-        text-4xl lg:text-6xl text-white font-mono
+        text-8xl xl:text-8xl lg:text-7xl md:text-6xl sm:text-4xl text-white font-coolParty
+
     }
 
 }

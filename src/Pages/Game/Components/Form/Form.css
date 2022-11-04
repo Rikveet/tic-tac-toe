@@ -4,6 +4,6 @@
     .form{
         @apply
             backdrop-filter backdrop-blur
-            h-1/2 w-1/2
+            h-1/2 w-1/2 md:w-full
     }
 }

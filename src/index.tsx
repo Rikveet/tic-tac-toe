@@ -4,19 +4,21 @@ import './index.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import HomePage from "./Pages/HomePage/HomePage";
 import Game from "./Pages/Game/Game";
-import {FormSettings} from "./Types/Types";
+import {Settings} from "./Types/Types";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
 const App = () => {
-    const formSettings = useRef<FormSettings>();
-
+    const formSettings = useRef<Settings>();
+    const heading = "Tic Tac Toe";
     return (
-        <div className='bg-gradient flex-col px-6 h-screen w-screen'>
+        <div className='bg-gradient flex-col px-6 md:px-0 h-screen w-screen'>
             <div className='page-heading'>
-                Tic Tac Toe
+                {heading.split('').map((char,index)=>{
+                    return <span key={index} className={'hover:scale-75'}>{char}</span>
+                })}
             </div>
             <BrowserRouter>
                 <Routes>
