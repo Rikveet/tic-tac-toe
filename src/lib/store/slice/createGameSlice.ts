@@ -1,8 +1,10 @@
 import {CellMark, Game, Player, PlayerO, PlayerX} from "@/env";
 import {getEmptyBoard, getEmptyCell} from "@/lib/util";
 import {createSlice} from "@reduxjs/toolkit";
+import {act} from "react";
 
 const initialState: Game = {
+    isVanishing: false,
     boardState: getEmptyBoard(),
     isOver: {result: "", value: false},
     lastMoveBy: undefined,
@@ -22,7 +24,7 @@ export const gameSlice = createSlice({
                 result: ""
             }
             state.boardState = getEmptyBoard()
-            state.players = action.payload.players ? action.payload.players: [undefined, undefined]
+            state.players = action.payload.players ? action.payload.players : [undefined, undefined]
         },
         setPlayer: (state, action: { payload: Player }) => {
             const player = action.payload
@@ -41,11 +43,21 @@ export const gameSlice = createSlice({
 
             state.moveNum += 1
 
-            state.boardState.forEach((cell, index) => {
-                if (state.moveNum - cell.placedAtMoveNum > 7 && cell.placedAtMoveNum !== -1) {
-                    state.boardState[index] = getEmptyCell() // remove stale positions
-                }
-            })
+            if (state.isVanishing) {
+                let oldestCell = {index: 0, val: 0}
+                state.boardState.forEach((cell, index) => {
+                    if (state.moveNum - cell.placedAtMoveNum > 4 && cell.placedAtMoveNum !== -1) {
+                        if (oldestCell.val < (state.moveNum - cell.placedAtMoveNum))
+                            oldestCell = {
+                                index,
+                                val: state.moveNum - cell.placedAtMoveNum
+                            }
+                    }
+                })
+                if (oldestCell.val > 4)
+                    state.boardState[oldestCell.index] = getEmptyCell() // remove the oldest state position
+            }
+
 
             state.lastMoveBy = player.mark
         },
@@ -54,8 +66,11 @@ export const gameSlice = createSlice({
                 value: true,
                 result: action.payload.result
             }
+        },
+        setVanishing: (state, action: { payload: boolean }) => {
+            state.isVanishing = action.payload
         }
     }
 })
 
-export const {resetBoard, setPlayer, placeMarker, endGame} = gameSlice.actions
+export const {resetBoard, setPlayer, placeMarker, endGame, setVanishing} = gameSlice.actions

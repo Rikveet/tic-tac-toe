@@ -42,6 +42,7 @@ export type CellValue = {
 export type BoardState = CellValue[]
 
 export type Game = {
+    isVanishing: boolean,
     boardState: BoardState,
     players: [PlayerO | undefined, PlayerX | undefined],
     isOver: {

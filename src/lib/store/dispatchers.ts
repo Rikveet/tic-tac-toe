@@ -4,7 +4,7 @@ import {useAppDispatch} from "@/lib/store/index";
 import {pushNotification, removeNotification} from "@/lib/store/slice/createNotificationSlice";
 import {CellMark, ModalSlice, Player, PlayerO, PlayerX} from "@/env";
 import {closeModal, exitModal, openModal} from "@/lib/store/slice/createModalSlice";
-import {endGame, placeMarker, resetBoard, setPlayer} from "@/lib/store/slice/createGameSlice";
+import {endGame, placeMarker, resetBoard, setPlayer, setVanishing} from "@/lib/store/slice/createGameSlice";
 
 const getNotifyId = () => Date.now() + Math.floor(Math.random() * 1000)
 
@@ -58,6 +58,9 @@ export const useDispatchers = () => {
             },
             setPlayer: (name: string, mark: CellMark) => {
                 dispatch(setPlayer({name, mark}))
+            },
+            setVanishMode: (open: boolean)=>{
+                dispatch(setVanishing(open))
             }
         }
     }

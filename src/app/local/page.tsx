@@ -7,10 +7,11 @@ import {useEffect, useState} from "react";
 import {Player} from "@/env";
 import {useDispatchers} from "@/lib/store/dispatchers";
 import Button from "@/components/Button";
-import {motion} from 'framer-motion';
+import {AnimatePresence, motion} from 'framer-motion';
 import LocalPlayersLoader from "@/components/Loaders/LocalPlayersLoader";
 import {evaluateBoard} from "@/lib/util";
 import GameOver from "@/components/GameOver";
+import {BsGear} from "react-icons/bs";
 
 export default function Page() {
     const {boardState, players, isOver: isGameOver, moveNum, lastMoveBy} = useGameState()
@@ -78,6 +79,26 @@ export default function Page() {
 
     return (
         <div className={styles.wrapper}>
+            <motion.div
+                className={'absolute bottom-[10px] right-[50px] h-[50px] w-[50px] cursor-pointer'}
+                onClick={() => {
+                    openPlayerInfoModal()
+                }}
+                whileHover={{
+                    rotateZ: '180deg',
+                    scale: 0.95
+                }}
+                transition={{
+                    duration: 0.3,
+                    ease: 'easeInOut'
+                }}
+                whileTap={{
+                    scale: 0.9
+                }}
+            >
+                <BsGear className={'h-[100%] w-[100%]'} />
+            </motion.div>
+
             <motion.div className={styles.container} layout={true}>
                 {
                     playersLoaded && players[0] && players[1] && currentPlayer ?
@@ -86,7 +107,32 @@ export default function Page() {
                                 isGameOver.value ?
                                     <></> :
                                     <div className={styles.heading}>
-                                        {`${lastMoveBy === 'O' ? players[1]?.name : players[0]?.name}'s turn`.toUpperCase()}
+                                        <AnimatePresence mode={'popLayout'}>
+                                            <motion.span
+                                                className={'cursor-pointer'}
+                                                key={lastMoveBy}
+                                                initial={{
+                                                    opacity: 0,
+                                                    y: '-100%'
+                                                }}
+                                                animate={{
+                                                    opacity: 1,
+                                                    y: '0'
+                                                }}
+                                                exit={{
+                                                    opacity: 0,
+                                                    y: '100%'
+                                                }}
+                                                transition={{
+                                                    duration: 0.3,
+                                                    type: 'spring',
+                                                    ease: 'easeInOut'
+                                                }}
+                                            >
+                                                {`${lastMoveBy === 'O' ? players[1]?.name : players[0]?.name}`.toUpperCase()}
+                                            </motion.span>
+                                        </AnimatePresence>
+                                        'S TURN
                                     </div>
                             }
 
