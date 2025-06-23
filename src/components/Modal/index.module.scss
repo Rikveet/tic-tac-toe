@@ -1,0 +1,79 @@
+.wrapper {
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 100;
+
+  .container {
+    background: white;
+    border-radius: 25px;
+    padding: 10px;
+    height: fit-content;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+      .heading{
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 2px;
+        border-bottom: 2px black solid;
+        color: black;
+        gap: 10px;
+
+        .title{
+          font-family: 'Helvetica', serif;
+          font-size: 30px;
+          font-weight: bold;
+        }
+
+        .closeButton{
+          height: 50px;
+          aspect-ratio: 1;
+          width: auto;
+        }
+
+      }
+
+    .childContainer{
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer{
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-start;
+
+      .closeButton{
+
+      }
+    }
+  }
+}

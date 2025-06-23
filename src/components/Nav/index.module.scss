@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: 100%;
+
+  .container {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    gap: 15px;
+    background: rgba(255,255,255, 0.95);
+    border-radius: 0 0 10px 10px;
+
+    .link{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+      height: 50px;
+      padding: 5px;
+      cursor: pointer;
+      background: white;
+      color: black;
+      border-radius: 10px;
+      z-index: 10;
+    }
+  }
+}

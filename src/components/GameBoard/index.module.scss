@@ -1,0 +1,30 @@
+.container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  background: transparent;
+
+  .cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xxx-large;
+    font-weight: bold;
+    font-family: monospace;
+    border-radius: 20px;
+    height: 100px;
+    width: auto;
+    aspect-ratio: 1;
+    cursor: pointer;
+
+    .text{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

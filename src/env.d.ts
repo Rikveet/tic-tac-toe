@@ -1,0 +1,53 @@
+import {ReactNode} from "react";
+
+export type ModalSlice = {
+    isOpen: boolean,
+    component?: {
+        title: string,
+        child: ReactNode,
+        onClose?: () => boolean, // invalid attempt notification should be handled by the function provided
+    }
+}
+
+export type Notification = {
+    msgType: 'SUCCESS' | 'INFO' | 'FAILED',
+    message: string,
+    createdAt: number,
+    id: number
+}
+
+export type NotificationSlice = {
+    notifications: Notification[]
+}
+
+export type CellMark = "O" | "X"
+
+export type PlayerO = {
+    name: string,
+    mark: CellMark
+}
+
+export type PlayerX = {
+    name: string,
+    mark: CellMark
+}
+
+export type Player = PlayerO | PlayerX
+
+export type CellValue = {
+    value: 0 | 1 | null,
+    placedAtMoveNum: number
+}
+
+export type BoardState = CellValue[]
+
+export type Game = {
+    boardState: BoardState,
+    players: [PlayerO | undefined, PlayerX | undefined],
+    isOver: {
+        value: boolean,
+        result: string
+    },
+    lastMoveBy: "O" | "X" | undefined,
+    moveNum: number,
+}
