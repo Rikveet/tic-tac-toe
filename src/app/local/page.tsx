@@ -1,7 +1,7 @@
 "use client";
 
 import styles from './index.module.scss'
-import {getGameState, getModalState} from "@/lib/store/selectors";
+import {useGameState, useModalState} from "@/lib/store/selectors";
 import GameBoard from "@/components/GameBoard";
 import {useEffect, useState} from "react";
 import {Player} from "@/env";
@@ -13,8 +13,8 @@ import {evaluateBoard} from "@/lib/util";
 import GameOver from "@/components/GameOver";
 
 export default function Page() {
-    const {boardState, players, isOver: isGameOver, moveNum, lastMoveBy} = getGameState()
-    const {isOpen: isModalOpen} = getModalState()
+    const {boardState, players, isOver: isGameOver, moveNum, lastMoveBy} = useGameState()
+    const {isOpen: isModalOpen} = useModalState()
     const [currentPlayer, setCurrentPlayer] = useState<Player | undefined>(players[0])
 
     const {modal, notify, gameStore} = useDispatchers()

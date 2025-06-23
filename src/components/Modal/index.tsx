@@ -3,14 +3,14 @@
 import styles from "./index.module.scss"
 import CloseIcon from "@/components/CloseIcon";
 import {useDispatchers} from "@/lib/store/dispatchers";
-import {getModalState} from "@/lib/store/selectors";
+import {useModalState} from "@/lib/store/selectors";
 import Button from "@/components/Button";
 import {AnimatePresence, motion} from "framer-motion";
 import {Fragment} from "react";
 
 export default function Modal() {
     const {modal: {exit: exitModal, close: closeModal}} = useDispatchers();
-    const {component} = getModalState();
+    const {component} = useModalState();
 
     return (
         <AnimatePresence mode={"wait"}>

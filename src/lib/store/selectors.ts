@@ -2,6 +2,6 @@
 
 import {useAppSelector} from "@/lib/store";
 
-export const getModalState = ()=> useAppSelector(state => state.modal)
-export const getNotificationsState = ()=> useAppSelector(state=>state.notifications)
-export const getGameState =  ()=> useAppSelector(state=>state.game)
+export const useModalState = ()=> useAppSelector(state => state.modal)
+export const useNotificationsState = ()=> useAppSelector(state=>state.notifications)
+export const useGameState =  ()=> useAppSelector(state=>state.game)

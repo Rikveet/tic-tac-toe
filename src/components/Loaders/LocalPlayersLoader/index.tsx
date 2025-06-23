@@ -1,7 +1,7 @@
 "use client";
 
 import styles from './index.module.scss';
-import {getGameState} from "@/lib/store/selectors";
+import {useGameState} from "@/lib/store/selectors";
 import {useDispatchers} from "@/lib/store/dispatchers";
 import {motion} from 'framer-motion';
 import {CellMark, Player} from "@/env";
@@ -34,7 +34,7 @@ const PlayerNameInput = ({player, mark, autoFocus}: { player?: Player, mark: Cel
 }
 
 export default function LocalPlayersLoader() {
-    const {players} = getGameState()
+    const {players} = useGameState()
     const {gameStore} = useDispatchers()
 
     return (

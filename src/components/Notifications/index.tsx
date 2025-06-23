@@ -1,7 +1,7 @@
 "use client"
 
 import styles from './index.module.scss'
-import {getNotificationsState} from "@/lib/store/selectors";
+import {useNotificationsState} from "@/lib/store/selectors";
 import {AnimatePresence, motion} from "framer-motion";
 import {Notification} from "@/env";
 
@@ -38,7 +38,7 @@ function Toast({msgType, message, id}: Pick<Notification, "message" | "msgType" 
 }
 
 export default function Notifications() {
-    const {notifications} = getNotificationsState()
+    const {notifications} = useNotificationsState()
 
     return (
         <div className={styles.wrapper}>

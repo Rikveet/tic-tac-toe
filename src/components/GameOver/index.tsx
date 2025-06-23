@@ -2,11 +2,11 @@
 
 import {motion} from 'framer-motion';
 import styles from './index.module.scss'
-import {getGameState} from "@/lib/store/selectors";
+import {useGameState} from "@/lib/store/selectors";
 import Button from "@/components/Button";
 
 export default function GameOver({resetAction}:{resetAction: ()=>void}) {
-    const {isOver: {value, result}} = getGameState()
+    const {isOver: {value, result}} = useGameState()
     return (
         <motion.div className={styles.container}
                     initial={{scale: 0}}

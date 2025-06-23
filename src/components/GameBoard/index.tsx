@@ -1,12 +1,12 @@
 "use client"
 
 import styles from './index.module.scss';
-import {getGameState} from "@/lib/store/selectors";
+import {useGameState} from "@/lib/store/selectors";
 import {motion} from 'framer-motion';
 import {useEffect} from "react";
 
 export default function GameBoard({onCellAction}: { onCellAction: (position: number) => void }) {
-    const {boardState, lastMoveBy, moveNum} = getGameState();
+    const {boardState, lastMoveBy, moveNum} = useGameState();
 
     return (
         <motion.div className={styles.container}
