@@ -192,11 +192,13 @@ export const useAiWorker = () => {
 
        try{
            const code = memoizedAiBestPosFunc.toString()
+           console.log(code)
            const workerScript = `
                 ${code}
                 
                 self.onmessage = function(e) {
                     try {
+                        console.log(this, e)
                         const result = getBestMove(e.data);
                         self.postMessage(result);
                     } catch (error) {
