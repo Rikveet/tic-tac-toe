@@ -1,22 +1,4 @@
-import {AiDifficulty, AiWorkerInput, BoardState, CellMark} from "@/env";
-import {getEmptyCell} from "@/lib/util/index";
-import {useCallback, useEffect, useState} from "react";
-
-
-export const useAiWorker = () => {
-    const [result, setResult] = useState<number | null>(null);
-    const [error, setError] = useState<string | null>(null)
-    const [processing, setProcessing] = useState(false)
-    const [inputData, setAiInputData] = useState<AiWorkerInput>()
-
-    useEffect(() => {
-
-        setProcessing(true)
-        setError(null)
-        setResult(null)
-
-        try {
-            const code = `function getBestMove({boardState, difficulty, aiMark, isVanishing}) {
+function getBestMove({boardState, difficulty, aiMark, isVanishing}) {
     const opponentMark = aiMark === "X" ? "O" : "X"
 
     function getAvailableMoves() {
@@ -186,52 +168,4 @@ export const useAiWorker = () => {
         default:
             return getRandomMove(availableMoves)
     }
-}`
-
-            const workerScript = `
-                ${code}
-                
-                self.onmessage = function(e) {
-                    try {
-                       
-                        const result = getBestMove(e.data);
-                        self.postMessage(result);
-                    } catch (error) {
-                        self.postMessage({ error: error.message });
-                    }
-                }
-            `;
-            const blob = new Blob([workerScript], {type: 'application/javascript'})
-            const workerScriptUrl = URL.createObjectURL(blob)
-            const worker = new Worker(workerScriptUrl)
-
-            worker.postMessage(inputData)
-
-            worker.onmessage = (e) => {
-                if (!e.data.error) {
-                    setResult(e.data)
-                    setProcessing(false)
-                }
-                console.log(e)
-            }
-
-            worker.onerror = (e) => {
-                setError(e.message)
-                setProcessing(false)
-                console.log(e)
-            }
-
-            return () => {
-                worker.terminate()
-                URL.revokeObjectURL(workerScriptUrl)
-            }
-        } catch (e) {
-            setError("error")
-            setProcessing(false)
-            console.log(e)
-        }
-
-    }, [inputData])
-
-    return {result, error, processing, setAiInputData}
 }
