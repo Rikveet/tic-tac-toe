@@ -9,7 +9,14 @@ export const useAiWorker = () => {
     const [processing, setProcessing] = useState(false)
     const [inputData, setAiInputData] = useState<AiWorkerInput>()
 
-    function getBestMove({boardState, difficulty, aiMark, isVanishing}: AiWorkerInput): number {
+    useEffect(() => {
+
+        setProcessing(true)
+        setError(null)
+        setResult(null)
+
+       try{
+           const code = `  function getBestMove({boardState, difficulty, aiMark, isVanishing}: AiWorkerInput): number {
         const opponentMark = aiMark === "X" ? "O" : "X"
 
         function getAvailableMoves(): number[] {
@@ -181,24 +188,14 @@ export const useAiWorker = () => {
         }
     }
 
+`
 
-    const memoizedAiBestPosFunc = useCallback(getBestMove, [])
-
-    useEffect(() => {
-
-        setProcessing(true)
-        setError(null)
-        setResult(null)
-
-       try{
-           const code = memoizedAiBestPosFunc.toString()
-           console.log(code)
            const workerScript = `
                 ${code}
                 
                 self.onmessage = function(e) {
                     try {
-                        console.log(this, e)
+                       
                         const result = getBestMove(e.data);
                         self.postMessage(result);
                     } catch (error) {
@@ -237,7 +234,7 @@ export const useAiWorker = () => {
            console.log(e)
        }
 
-    }, [inputData, memoizedAiBestPosFunc])
+    }, [inputData])
 
     return {result, error, processing, setAiInputData}
 }
