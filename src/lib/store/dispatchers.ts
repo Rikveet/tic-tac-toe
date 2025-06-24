@@ -2,7 +2,7 @@
 
 import {useAppDispatch} from "@/lib/store/index";
 import {pushNotification, removeNotification} from "@/lib/store/slice/createNotificationSlice";
-import {CellMark, ModalSlice, Player, PlayerO, PlayerX} from "@/env";
+import {BoardState, CellMark, ModalSlice, Player, PlayerO, PlayerX} from "@/env";
 import {closeModal, exitModal, openModal} from "@/lib/store/slice/createModalSlice";
 import {endGame, placeMarker, resetBoard, setPlayer, setVanishing} from "@/lib/store/slice/createGameSlice";
 
@@ -48,18 +48,18 @@ export const useDispatchers = () => {
         },
         gameStore: {
             resetBoard: (players?: { playerO: PlayerO, playerX: PlayerX }) => {
-                dispatch(resetBoard({players: players ? [players.playerO, players.playerX]: undefined}))
+                dispatch(resetBoard({players: players ? [players.playerO, players.playerX] : undefined}))
             },
             placeMark: (player: Player, position: number) => {
                 dispatch(placeMarker({player, position}))
             },
-            endGame: (result: string) => {
-                dispatch(endGame({result}))
+            endGame: (result: string, winner?: { combo: number[], board: BoardState }) => {
+                dispatch(endGame({result, winner}))
             },
             setPlayer: (name: string, mark: CellMark) => {
                 dispatch(setPlayer({name, mark}))
             },
-            setVanishMode: (open: boolean)=>{
+            setVanishMode: (open: boolean) => {
                 dispatch(setVanishing(open))
             }
         }

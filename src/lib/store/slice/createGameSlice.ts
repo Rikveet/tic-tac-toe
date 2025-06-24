@@ -1,7 +1,7 @@
-import {CellMark, Game, Player, PlayerO, PlayerX} from "@/env";
+import {BoardState, Game, Player, PlayerO, PlayerX} from "@/env";
 import {getEmptyBoard, getEmptyCell} from "@/lib/util";
 import {createSlice} from "@reduxjs/toolkit";
-import {act} from "react";
+import GameBoard from "@/components/Game/Board";
 
 const initialState: Game = {
     isVanishing: false,
@@ -39,6 +39,8 @@ export const gameSlice = createSlice({
             if (state.lastMoveBy === player.mark)
                 return;
 
+            console.log(state.boardState)
+
             state.boardState[position] = {value: player.mark === "O" ? 0 : 1, placedAtMoveNum: state.moveNum}
 
             state.moveNum += 1
@@ -46,7 +48,7 @@ export const gameSlice = createSlice({
             if (state.isVanishing) {
                 let oldestCell = {index: 0, val: 0}
                 state.boardState.forEach((cell, index) => {
-                    if (state.moveNum - cell.placedAtMoveNum > 4 && cell.placedAtMoveNum !== -1) {
+                    if (state.moveNum - cell.placedAtMoveNum > 5 && cell.placedAtMoveNum !== -1) {
                         if (oldestCell.val < (state.moveNum - cell.placedAtMoveNum))
                             oldestCell = {
                                 index,
@@ -54,17 +56,24 @@ export const gameSlice = createSlice({
                             }
                     }
                 })
-                if (oldestCell.val > 4)
+                if (oldestCell.val > 5)
                     state.boardState[oldestCell.index] = getEmptyCell() // remove the oldest state position
             }
 
 
             state.lastMoveBy = player.mark
         },
-        endGame: (state, action: { payload: { result: string } }) => {
+        endGame: (state, action: { payload: { result: string, winner?: { combo: number[], board: BoardState } } }) => {
             state.isOver = {
                 value: true,
-                result: action.payload.result
+                result: action.payload.result,
+                ...(action.payload.winner ?
+                        {
+                            combo: action.payload.winner.combo,
+                            board: action.payload.winner.board
+                        } :
+                        {}
+                )
             }
         },
         setVanishing: (state, action: { payload: boolean }) => {

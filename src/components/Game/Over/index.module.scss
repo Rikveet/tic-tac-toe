@@ -1,0 +1,61 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  height: fit-content;
+  width: 100%;
+
+  .heading{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 5px;
+    color: rgb(255,255,255);
+  }
+  .message{
+    font-family: monospace;
+    font-weight: normal;
+    font-size: 25px;
+    padding: 5px;
+    color: rgb(245,245,245);
+  }
+  .button{
+    background: white;
+    color: black;
+  }
+
+
+  .game{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    background: transparent;
+
+    .cell{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: xxx-large;
+      font-weight: bold;
+      font-family: monospace;
+      border-radius: 20px;
+      height: 100px;
+      width: auto;
+      aspect-ratio: 1;
+      cursor: default;
+      overflow: hidden;
+
+      .text{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -2,16 +2,15 @@
 
 import styles from './index.module.scss'
 import {useGameState, useModalState} from "@/lib/store/selectors";
-import GameBoard from "@/components/GameBoard";
 import {useEffect, useState} from "react";
 import {Player} from "@/env";
 import {useDispatchers} from "@/lib/store/dispatchers";
 import Button from "@/components/Button";
 import {AnimatePresence, motion} from 'framer-motion';
-import LocalPlayersLoader from "@/components/Loaders/LocalPlayersLoader";
-import {evaluateBoard} from "@/lib/util";
-import GameOver from "@/components/GameOver";
+import LocalPlayersLoader from "@/components/Game/Loaders/LocalPlayersLoader";
 import {BsGear} from "react-icons/bs";
+import Game from "@/components/Game";
+import Settings from "@/components/Game/Settings";
 
 export default function Page() {
     const {boardState, players, isOver: isGameOver, moveNum, lastMoveBy} = useGameState()
@@ -69,105 +68,40 @@ export default function Page() {
         }
     }, [playersLoaded])
 
-    useEffect(() => {
-        const res = evaluateBoard(boardState)
-        if (res) {
-            gameStore.endGame(res === "DRAW" ? "It's a draw" : `${res === 'X' ? players[1]?.name : players[0]?.name} won!`)
-            notify.info('Game over.')
-        }
-    }, [boardState]);
 
     return (
         <div className={styles.wrapper}>
-            <motion.div
-                className={'absolute bottom-[10px] right-[50px] h-[50px] w-[50px] cursor-pointer'}
-                onClick={() => {
-                    openPlayerInfoModal()
-                }}
-                whileHover={{
-                    rotateZ: '180deg',
-                    scale: 0.95
-                }}
-                transition={{
-                    duration: 0.3,
-                    ease: 'easeInOut'
-                }}
-                whileTap={{
-                    scale: 0.9
-                }}
-            >
-                <BsGear className={'h-[100%] w-[100%]'} />
-            </motion.div>
+            <Settings
+                onClickAction={() => {
+                openPlayerInfoModal()
+            }}/>
 
             <motion.div className={styles.container} layout={true}>
                 {
                     playersLoaded && players[0] && players[1] && currentPlayer ?
-                        <div className={styles.game}>
-                            {
-                                isGameOver.value ?
-                                    <></> :
-                                    <div className={styles.heading}>
-                                        <AnimatePresence mode={'popLayout'}>
-                                            <motion.span
-                                                className={'cursor-pointer'}
-                                                key={lastMoveBy}
-                                                initial={{
-                                                    opacity: 0,
-                                                    y: '-100%'
-                                                }}
-                                                animate={{
-                                                    opacity: 1,
-                                                    y: '0'
-                                                }}
-                                                exit={{
-                                                    opacity: 0,
-                                                    y: '100%'
-                                                }}
-                                                transition={{
-                                                    duration: 0.3,
-                                                    type: 'spring',
-                                                    ease: 'easeInOut'
-                                                }}
-                                            >
-                                                {`${lastMoveBy === 'O' ? players[1]?.name : players[0]?.name}`.toUpperCase()}
-                                            </motion.span>
-                                        </AnimatePresence>
-                                        'S TURN
-                                    </div>
+                        <Game
+                            onCellAction={
+                                (position) => {
+                                    gameStore.placeMark(currentPlayer, position)
+                                    setCurrentPlayer(players[currentPlayer?.mark === 'O' ? 1 : 0])
+                                }
                             }
 
-                            {
-                                isGameOver.value ?
-                                    <GameOver
-                                        resetAction={() => {
-                                            if (players[0] && players[1])
-                                                setCurrentPlayer(players[0])
-                                            else
-                                                setCurrentPlayer(undefined)
-                                            gameStore.resetBoard(
-                                                players[0] && players[1] ?
-                                                    {
-                                                        playerO: players[0],
-                                                        playerX: players[1]
-                                                    } :
-                                                    undefined
-                                            )
-                                        }}/>
-                                    :
-                                    <GameBoard
-                                        onCellAction={
-                                            (position) => {
-                                                gameStore.placeMark(currentPlayer, position)
-                                                setCurrentPlayer(players[currentPlayer?.mark === 'O' ? 1 : 0])
-                                            }
-                                        }
-                                    />
-                            }
-                            <div className={styles.boardStats}>
-                                <div>Move #</div>
-                                <div>{moveNum + 1}</div>
-                            </div>
-                        </div>
+                            resetAction={() => {
+                                if (players[0] && players[1])
+                                    setCurrentPlayer(players[0])
+                                else
+                                    setCurrentPlayer(undefined)
+                                gameStore.resetBoard(
+                                    players[0] && players[1] ?
+                                        {
+                                            playerO: players[0],
+                                            playerX: players[1]
+                                        } :
+                                        undefined
+                                )
+                            }}
+                        />
                         :
                         <div className={styles.playerMissing}>
                             <div className={styles.text}>

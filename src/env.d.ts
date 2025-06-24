@@ -20,6 +20,8 @@ export type NotificationSlice = {
     notifications: Notification[]
 }
 
+export type AiDifficulty = "EASY" | "MEDIUM" | "HARD"
+
 export type CellMark = "O" | "X"
 
 export type PlayerO = {
@@ -47,8 +49,20 @@ export type Game = {
     players: [PlayerO | undefined, PlayerX | undefined],
     isOver: {
         value: boolean,
+        board?: BoardState,
+        combo?: number[],
         result: string
     },
     lastMoveBy: "O" | "X" | undefined,
     moveNum: number,
+}
+
+
+interface AiWorkerInput {
+    boardState: BoardState,
+    difficulty: AiDifficulty,
+    aiMark: CellMark,
+    isVanishing?: {
+        movesDone: number
+    }
 }

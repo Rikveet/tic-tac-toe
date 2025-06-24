@@ -1,0 +1,34 @@
+.game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: fit-content;
+  width: fit-content;
+  gap: 25px;
+
+  .heading {
+    display: flex;
+    height: fit-content;
+    padding: 5px;
+    width: fit-content;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 35px;
+    color: white;
+  }
+
+  .boardStats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    color: white;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    height: 50px;
+    width: 100%;
+  }
+}
+

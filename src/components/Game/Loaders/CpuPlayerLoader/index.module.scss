@@ -1,0 +1,57 @@
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 200px;
+  width: 300px;
+  padding: 20px;
+
+  .nameInput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 2px black solid;
+    border-radius: 15px;
+    height: 75px;
+    width: 100%;
+    left: 0;
+    color: black;
+    font-family: 'Helvetica', serif;
+    font-size: 20px;
+    padding: 10px;
+    background: aliceblue;
+  }
+
+  .select{
+    font-family: monospace;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+
+    span{
+      font-size: 22px;
+    }
+
+    select{
+      font-size: 20px;
+      padding: 10px;
+      border-radius: 15px;
+      border: 2px solid black;
+      cursor: pointer;
+      option{
+        cursor: pointer;
+      }
+    }
+  }
+
+
+
+}

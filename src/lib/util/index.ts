@@ -14,7 +14,7 @@ export const getEmptyBoard = () => {
     return board
 }
 
-export const evaluateBoard: (board: BoardState) => "O" | "X" | "DRAW" | void = (board) => {
+export const evaluateBoard: (board: BoardState) => {winner: "O" | "X", winningCombo: number[], board: BoardState} | "DRAW" | void = (board) => {
     const winningCombos = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
@@ -25,7 +25,11 @@ export const evaluateBoard: (board: BoardState) => "O" | "X" | "DRAW" | void = (
     for (const combo of winningCombos) {
         const [a, b, c] = combo;
         if (board[a].value !== null && board[a].value === board[b].value && board[a].value === board[c].value) {
-            return board[a].value === 1 ? "X" : "O"
+            return{
+                winner:  board[a].value === 1 ? "X" : "O",
+                winningCombo: combo,
+                board
+            }
         }
     }
 
