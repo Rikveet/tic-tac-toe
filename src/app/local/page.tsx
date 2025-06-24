@@ -7,10 +7,10 @@ import {Player} from "@/env";
 import {useDispatchers} from "@/lib/store/dispatchers";
 import Button from "@/components/Button";
 import {AnimatePresence, motion} from 'framer-motion';
-import LocalPlayersLoader from "@/components/Game/Loaders/LocalPlayersLoader";
 import {BsGear} from "react-icons/bs";
 import Game from "@/components/Game";
 import Settings from "@/components/Game/Settings";
+import LocalPlayersLoader from "@/components/Game/Loaders/LocalPlayersLoader";
 
 export default function Page() {
     const {boardState, players, isOver: isGameOver, moveNum, lastMoveBy} = useGameState()

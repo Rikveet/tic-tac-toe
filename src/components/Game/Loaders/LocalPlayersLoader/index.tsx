@@ -35,7 +35,6 @@ const PlayerNameInput = ({player, mark, autoFocus}: { player?: Player, mark: Cel
 
 export default function LocalPlayersLoader() {
     const {players} = useGameState()
-    const {gameStore} = useDispatchers()
 
     return (
         <div className={styles.container}>
