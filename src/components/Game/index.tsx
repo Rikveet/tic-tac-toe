@@ -65,7 +65,7 @@ export default function Game({resetAction, onCellAction}: {
                                 {`${lastMoveBy === 'O' ? players[1]?.name : players[0]?.name}`.toUpperCase()}
                             </motion.span>
                         </AnimatePresence>
-                        'S TURN
+                        &#39;S TURN
                     </div>
             }
 
