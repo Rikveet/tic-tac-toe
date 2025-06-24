@@ -9,14 +9,7 @@ export const useAiWorker = () => {
     const [processing, setProcessing] = useState(false)
     const [inputData, setAiInputData] = useState<AiWorkerInput>()
 
-    useEffect(() => {
-
-        setProcessing(true)
-        setError(null)
-        setResult(null)
-
-       try{
-           const code = `  function getBestMove({boardState, difficulty, aiMark, isVanishing}: AiWorkerInput): number {
+    function getBestMove({boardState, difficulty, aiMark, isVanishing}: AiWorkerInput): number {
         const opponentMark = aiMark === "X" ? "O" : "X"
 
         function getAvailableMoves(): number[] {
@@ -188,8 +181,15 @@ export const useAiWorker = () => {
         }
     }
 
-`
+    useEffect(() => {
 
+        setProcessing(true)
+        setError(null)
+        setResult(null)
+
+       try{
+           const code = getBestMove.toString()
+           console.log(code)
            const workerScript = `
                 ${code}
                 
