@@ -215,13 +215,13 @@ export const useAiWorker = () => {
                    setResult(e.data)
                    setProcessing(false)
                }
-
+                console.log(e)
            }
 
            worker.onerror = (e) => {
                setError(e.message)
                setProcessing(false)
-
+               console.log(e)
            }
 
            return () => {
@@ -232,6 +232,7 @@ export const useAiWorker = () => {
        catch (e){
            setError("error")
            setProcessing(false)
+           console.log(e)
        }
 
     }, [inputData, memoizedAiBestPosFunc])
