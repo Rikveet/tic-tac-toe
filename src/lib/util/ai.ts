@@ -1,4 +1,4 @@
-import {AiDifficulty, AiWorkerInput, BoardState, CellMark} from "@/env";
+import {AiWorkerInput} from "@/env";
 import {getEmptyCell} from "@/lib/util/index";
 import {useCallback, useEffect, useState} from "react";
 
@@ -212,13 +212,11 @@ export const useAiWorker = () => {
                     setResult(e.data)
                     setProcessing(false)
                 }
-                console.log(e)
             }
 
             worker.onerror = (e) => {
                 setError(e.message)
                 setProcessing(false)
-                console.log(e)
             }
 
             return () => {
@@ -228,7 +226,6 @@ export const useAiWorker = () => {
         } catch (e) {
             setError("error")
             setProcessing(false)
-            console.log(e)
         }
 
     }, [inputData])

@@ -9,7 +9,7 @@ import {useGameState, useModalState} from "@/lib/store/selectors";
 import {useEffect, useState} from "react";
 import {AiDifficulty, AiWorkerInput, Player} from "@/env";
 import {useDispatchers} from "@/lib/store/dispatchers";
-import CpuPlayerLoader from "@/components/Game/Loaders/CpuPlayerLoader";
+import CpuPlayerLoader from "../../components/Game/Configs/CpuPlayerConfig";
 import {useAiWorker} from "@/lib/util/ai";
 
 

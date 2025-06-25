@@ -18,6 +18,8 @@ export default function CpuPlayerLoader(
     const {gameStore} = useDispatchers()
     const [playerO, playerX] = players
     const player = playerO?.name === 'Joe' ? playerX ?? {name: '', mark: 'X'} : playerO ?? {name: '', mark: 'O'}
+    const [_difficulty, _setDifficulty] = useState(difficulty)
+
     return (
         <div className={styles.container}>
             <motion.input
@@ -37,8 +39,9 @@ export default function CpuPlayerLoader(
                  <span>
                 Difficulty:
             </span>
-                <select defaultValue={"EASY"}
+                <select value={_difficulty}
                         onChange={(e) => {
+                            _setDifficulty(e.target.value as AiDifficulty)
                             onDifficultyChangeAction(e.target.value as AiDifficulty)
                         }}>
                     <option value={"EASY"}>

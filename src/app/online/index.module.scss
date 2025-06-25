@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  height: calc(100vh - 150px);
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .loginButton{
+    background: rgba(245,245,245);
+    color: black;
+    height: 70px;
+    width: 150px;
+  }
+
+}
